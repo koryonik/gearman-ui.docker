@@ -24,9 +24,14 @@ RUN curl -L https://github.com/gaspaio/gearmanui/archive/master.zip -o /tmp/gear
 	&& ln -s /gearmanui/web /var/www/html
 
 # Copy default Gearman UI configuration file
-COPY build/gearmanui.yml /gearmanui/app/config/
+COPY build/config.yml /gearmanui/config.yml
 
 # Install Gearman UI PHP Dependencies with Composer
 WORKDIR /gearmanui
 RUN composer install
 
+# Install frontend assets
+RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && apt-get install -y nodejs && npm install -g bower && bower install --allow-root && rm -rf /usr/lib/node_modules && apt-get remove -y nodejs && apt-get autoremove -y
+
+# Fix log file permissions
+RUN chown www-data:www-data /gearmanui/logs
