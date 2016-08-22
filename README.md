@@ -32,10 +32,10 @@ gearman:
 
 ## Configuration
 
-If you need to link multiple Gearman servers, or change other application settings, create & mount your own config file `gearmanui.yml` :
+If you need to link multiple Gearman servers, or change other application settings, create & mount your own config file `config.yml` :
 
 ```
-# gearmanui.yml
+# config.yml
 
 # The list of servers to monitor.
 gearmanui.servers:
